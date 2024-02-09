@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <title>Cecilia Madeda</title>
+      </head>
+       <body> 
+      <h1>About Me</h1>
+        <p>I am a solutions Architect who enjoys her work and the Impact it creates</p><br>
+        <p>I have a degree in information Technology and have work experience of 10 years</p><br>
+        <P>Here are some of the projects i have worked on</p>
+        <ul>
+          <li>ReactJ learning: </li>
+          <li> A lot moer</li>
+         </ul> 
+        <h2>My Hobbies</h2>
+        <p>I have a number of hobbies, they are listed below</p>
+        <ul>
+          <li>Reading</li>
+          <li> Swimming</li>
+          <li>Travelling</li>
+        <img scr="Phoenix.jpg" width="200" height="200">
+      </body>
+      </head>
+</html>
