@@ -1,11 +1,11 @@
 const fetch = require('node-fetch'); // Import node-fetch for making HTTP requests
-const stolenness = 'all';
+//const stolenness = 'all';
 
 // Define the bearer token
-const BEARER_TOKEN = 'yoLiilrGIGW2XfUJzDHtMMwtKRANtk_MajE9y00ITf0'; // Replace 'YOUR_BEARER_TOKEN' with your actual bearer token
+const BEARER_TOKEN = 'put your own'; // Replace 'YOUR_BEARER_TOKEN' with your actual bearer token
 
 // Function to fetch data from the Bike Index API
-async function fetchBikes(stolenness) {
+async function fetchBikes() {
     const url = `https://bikeindex.org/api/v3/search?stolenness=all&per_page=10`;
     try {
       const response = await fetch(url, {
@@ -33,10 +33,10 @@ async function fetchBikes(stolenness) {
     }
 
 // Function to display the list of bikes
-async function displayBikes(stolenness) {
+async function displayBikes() {
   try{
   // Call the fetchBikes function to fetch bikes data
-  const bikes = await fetchBikes(stolenness);
+  const bikes = await fetchBikes();
   const resultsList = document.getElementById('results');
   //resultsList.innerHTML = ''; // Clear previous results
   if (response.status === true) {
