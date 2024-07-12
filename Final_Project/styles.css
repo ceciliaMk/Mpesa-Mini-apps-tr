@@ -1,0 +1,73 @@
+body {
+    padding-top: 3%;
+}
+
+@media (min-width: 768px) {
+    .tile-group div a {
+        width: 12.5%;
+        font-size: 12px;
+    }
+}
+
+div.tile-group li {
+    list-style: none;
+    float: left;
+}
+
+.tile-group div {
+    float: left;
+    width: 8%;
+    height: 7%;
+    padding: 10px;
+    font-size: 10px;
+    line-height: 1.4;
+    text-align: center;
+    background-color: #f9f9f9;
+    border: 1px solid #fff;
+}
+
+.tile-group div:hover {
+    color: #000;
+    border: 1px solid #563d7c;
+}
+
+.tile-group div.selected {
+    color: #fff;
+    background-color: #563d7c;
+}
+
+.tile-group div.selected.old {
+    background-color: red;
+}
+
+.tile-group div a.tile-group-item {
+    color: #000;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    word-wrap: break-word;
+    font-size: large;
+}
+
+.tile-group div.selected a.tile-group-item {
+    color: #fff;
+}
+
+.jumbotron-input {
+    width: 40%;
+    line-height: 1.4;
+    padding-bottom: 1%;
+}
+
+span.selected {
+    padding: 2px;
+    border: 1px solid rgb(63, 63, 63);
+}
+
+.padding5px {
+    padding: 5px;
+}
+
+table.legend tr td:first-child {
+    width: 50%;
+}
