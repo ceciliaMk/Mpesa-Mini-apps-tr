@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Welcome | Briak Bus Services</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body ng-app="briakbookingApp" ng-controller="BehaviourController as bController" ng-init="bController.init()">
+
+    <div class="jumbotron">
+        <div class="container">
+
+            <h1 ng-show="bController.showWelcomeText">Briak Bus Ticket Booking</h1>
+            <p>{{bController.mainText}}</p>
+            <form ng-submit="bController.nextStep()">
+                <div class="jumbotron-input">
+                    <div class="input-group padding5px" ng-show="bController.showNameInput">
+                        <span class="input-group-addon" id="basic-addon1">@</span>
+                        <input type="text" class="form-control" placeholder="Lastname" aria-describedby="basic-addon1" ng-model="bController.name">
+                    </div>
+
+                    <div class="input-group padding5px" ng-show="bController.showIDInput">
+                        <span class="input-group-addon" id="basic-addon2">#</span>
+                        <input type="text" class="form-control" placeholder="ID Number" aria-describedby="basic-addon2" ng-model="bController.idNumber">
+                    </div>
+
+                    <div class="input-group padding5px" ng-show="bController.showDateInput">
+                        <span class="input-group-addon" id="basic-addon3">📅</span>
+                        <input type="text" class="form-control datepicker" placeholder="Travel Date" aria-describedby="basic-addon3" ng-model="bController.travelDate">
+                    </div>
+
+                    <div class="input-group padding5px" ng-show="bController.showTimeInput">
+                        <span class="input-group-addon" id="basic-addon4">🕒</span>
+                        <select class="form-control" aria-describedby="basic-addon4" ng-model="bController.travelTime">
+                            <option value="8am">8am</option>
+                            <option value="12pm">12pm</option>
+                            <option value="6pm">6pm</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group" ng-show="bController.showTicketQtyInput">
+                        <span class="input-group-addon" id="basic-addon5">*</span>
+                        <input type="text" class="form-control" placeholder="Number of tickets" aria-describedby="basic-addon5" ng-model="bController.count">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    {{bController.buttonText}}
+                </button>
+            </form>
+            <div ng-show="bController.showCategories">
+                You have selected
+                <span class="selected" ng-repeat="s in bController.selected">{{s}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="">Briak Bus Services</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="tile-group" ng-show="bController.showCategories">
+                    <span ng-repeat="seat in bController.seats">
+                        <div ng-class="{selected:seat.reserved, old:seat.old}" ng-click="bController.select(seat.name)">
+                            <a href="#" class="tile-group-item">
+                                {{seat.name}}
+                            </a>
+                        </div>
+                        <div style="width:100%;background:transparent;border:0;" ng-if="seat.newLine"></div>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-3" ng-show="bController.showCategories">
+                <table class="table table-bordered legend">
+                    <tr>
+                       <td style="background:red"></td>
+                       <td>Reserved</td>
+                    </tr>
+                    <tr>
+                       <td style="background:#d7e856"></td>
+                       <td>Selected</td>
+                    </tr>
+                    <tr>
+                       <td style="background:#0e9124"></td>
+                       <td>Empty</td>
+                    </tr>
+       </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <fieldset ng-show="bController.showReservationList()">
+                    <legend>Reservations</legend>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>ID Number</th>
+                                <th>Travel Date</th>
+                                <th>Travel Time</th>
+                                <th># of Seats</th>
+                                <th>Seat Nos.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="seat in bController.persistedSelections">
+                                <th scope="row">{{$index+1}}</th>
+                                <td>{{seat.name}}</td>
+                                <td>{{seat.idNumber}}</td>
+                                <td>{{seat.travelDate}}</td>
+                                <td>{{seat.travelTime}}</td>
+                                <td>{{seat.count}}</td>
+                                <td>
+                                    <span class="selected" ng-repeat="s in seat.seats">{{s}}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="index.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.datepicker').datepicker({
+                format: 'mm/dd/yyyy',
+                startDate: '-3d'
+            });
+        });
+    </script>
+</body>
+
+</html>
